@@ -9,6 +9,7 @@ source venv/bin/activate  # Use 'venv/Scripts/activate' for Windows
 
 # Install dependencies
 pip install --upgrade pip 
+pip3 install psycopg2 gunicorn
 pip install gunicorn 
 pip install -r requirements.txt 
 
