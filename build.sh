@@ -8,8 +8,10 @@ python -m venv venv
 source venv/bin/activate  # Use 'venv/Scripts/activate' for Windows
 
 # Install dependencies
-pip install --upgrade pip  
-pip install -r requirements.txt  
+pip install --upgrade pip 
+pip install gunicorn 
+pip install -r requirements.txt 
+
 
 # Run Django migrations
 python manage.py makemigrations  
