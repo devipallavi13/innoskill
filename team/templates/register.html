@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="{% static 'registration_page_style.css' %}">
+    <script src="{% static 'script.js' %}" defer></script>
+</head>
+<body class="registration-body-container">
+    <div class="registration-container">
+        <h2 class="registration-heading">Register</h2>
+        {% if messages %}
+        <ul class="message-list">
+            {% for message in messages %}
+            <li class="message-item {{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="{% url 'register' %}" method="POST" class="registration-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="registration-form-group">
+                <label for="name" class="registration-form-label">Name</label>
+                <input type="text" id="name" name="name" class="registration-form-input" placeholder="Enter your name" required>
+            </div>
+            <div class="registration-form-group">
+                <label for="username" class="registration-form-label">Username</label>
+                <input type="text" id="username" name="username" class="registration-form-input" placeholder="Enter your username" required>
+            </div>
+            <div class="registration-form-group">
+                <label for="email" class="registration-form-label">Email</label>
+                <input type="email" id="email" name="email" class="registration-form-input" placeholder="Enter your email" required>
+            </div>
+            <div class="registration-form-group">
+                <label for="password" class="registration-form-label">Password</label>
+                <input type="password" id="password" name="password" class="registration-form-input" placeholder="Enter your password" required>
+            </div>
+            <div class="registration-form-group">
+                <label for="re-password" class="registration-form-label">Re-enter Password</label>
+                <input type="password" id="re-password" name="re-password" class="registration-form-input" placeholder="Re-enter your password" required>
+            </div>
+            <div class="registration-form-group">
+                <label for="user_type" class="registration-form-label">User Type</label>
+                <select id="user_type" name="user_type" class="registration-form-input" required onchange="toggleOrganizationField()">
+                    <option value="normal">Normal User</option>
+                    <option value="organizer">Organizer</option>
+                </select>
+            </div>
+            
+            <div id="organization-verification-container" class="registration-form-group" style="display: none;">
+                <label for="organization_verification" class="registration-form-label">Organization Verification Document</label>
+                <input type="file" id="organization_verification" name="organization_verification" class="registration-form-input" accept="application/pdf,image/*">
+            </div>
+
+            <div class="registration-form-group">
+                <label for="profile_picture">Profile Picture:</label><br>
+                <input type="file" name="profile_picture" accept="image/*"><br>
+            </div>
+            
+            <button type="submit" class="registration-btn">Register</button>
+        </form>
+    </div>
+</body>
+</html>

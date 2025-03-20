@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'login_page_style.css' %}">
+</head>
+<body class="login-body-container">
+    <div class="login-container">
+        <h2 class="login-heading">Login</h2>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form action="{% url 'submit' %}" method="POST" class="login-form">
+            {% csrf_token %}
+            <div class="login-form-group">
+                <label for="username" class="login-form-label">username</label>
+                <input type="username" id="username" name="username" class="login-form-input" placeholder="Enter your username" required>
+            </div>
+            <div class="login-form-group">
+                <label for="password" class="login-form-label">Password</label>
+                <input type="password" id="password" name="password" class="login-form-input" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+            <a href="register.html">New User ?</a>
+        </form>
+    </div>
+</body>
+</html>

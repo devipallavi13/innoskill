@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome, {{ username }}</title>
+    <link rel="stylesheet" href="{% static 'user_page_style.css' %}">
+</head>
+<body>
+    <div class="header" style="font-family:garamond">
+        <div id="website-name">
+            <h1>INNO SKILL</h1>
+        </div>
+        <div id="user-dropdown" class="dropdown">
+            <h1 id="username-display">Welcome, {{ username }}</h1>
+            <div id="dropdown-content" class="dropdown-content">
+                <a href="{% url 'logout' %}">Logout</a>
+                <a href="{% url 'my_problems' %}">View My Problems</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-container">
+        <button class="post-button" onclick="showPopup()">Post</button>
+    
+        <div class="popup-overlay" id="popup">
+            <div class="popup-content">
+                <button class="close-btn" onclick="closePopup()">X</button>
+                <form action="{% url 'post' %}" method="POST" style="width: 100%; margin: auto;">
+                    {% csrf_token %}
+                    <label for="title">Title:</label><br>
+                    <input type="text" id="title" name="title" 
+                        placeholder="Enter your project name" 
+                        style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;"><br>
+    
+                    <label for="description">Description:</label><br>
+                    <textarea id="description" name="description" placeholder="Enter your description" rows="5" 
+                            style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;"></textarea><br>
+                    
+                    <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Submit</button>
+                </form>
+            </div>
+        </div>
+    
+        <br>    
+        <div class="post-container" style="padding-top: 20px;">
+            <h2 style="text-align: center; margin-top: 20px;">Posted Problems</h2>
+            {% if problems %}
+                {% for problem in problems %}
+                <div class="post-container">
+                    <div class="post-header">
+                        <img src="{{ problem.user.profile_picture.url }}" alt="Profile Picture" class="profile-pic">
+                        <div class="user-info">
+                            <span class="username">
+                                {{ problem.user.username}}
+                            </span>
+                            <span class="post-date">{{ problem.created_at|date:"F d, Y" }}</span>
+                        </div>
+                    </div>
+                    <div class="post-body">
+                        <div class="post-title"><strong>{{ problem.title }}</strong></div>
+                        <div class="post-description" id="description-{{ problem.id }}" style="display: none;">
+                            {{ problem.description }}
+                        </div>
+                        <span class="status-label">project-status : {{ problem.get_status_display }}</span><br>
+                        <span class="read-more" id="toggle-btn-{{ problem.id }}" onclick="toggleDescription('{{ problem.id }}')">See More</span>
+                    </div>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ problem.user.email }}" target="_blank">
+                        <button>Chat with {{ problem.user.username }}</button>
+                    </a>
+                    <!-- Solution Section (Collapsed by default) -->
+                    {% if problem.solutions.all %}
+                    <div class="solution-section">
+                        <button class="toggle-solutions" onclick="toggleSolutions('{{ problem.id }}')">Show Solutions</button>
+                        <div class="solutions-container" id="solutions-{{ problem.id }}" style="display: none;">
+                            {% for solution in problem.solutions.all %}
+                            <div class="solution-box">
+                                <strong>Organizer:</strong> {{ solution.organizer.username }}<br>
+                                <p>{{ solution.solution_text }}</p>
+                                <span class="solution-timestamp">{{ solution.timestamp|date:"F d, Y H:i" }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% else %}
+                        <p style="text-align: center;">No solutions yet.</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No problems posted yet.</p>
+            {% endif %}
+        </div>
+    </div>
+    
+    <script src="{% static 'script.js' %}"></script>
+    <script>
+        function toggleDescription(problemId) {
+            var desc = document.getElementById("description-" + problemId);
+            var toggleBtn = document.getElementById("toggle-btn-" + problemId);
+            if (desc.style.display === "none") {
+                desc.style.display = "block";
+                toggleBtn.textContent = "See Less";
+            } else {
+                desc.style.display = "none";
+                toggleBtn.textContent = "See More";
+            }
+        }
+
+        function toggleSolutions(problemId) {
+            var solContainer = document.getElementById("solutions-" + problemId);
+            solContainer.style.display = (solContainer.style.display === "none") ? "block" : "none";
+        }
+
+    </script>
+</body>
+</html>

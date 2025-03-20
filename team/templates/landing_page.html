@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="author" content="innoskill">
+      <meta name="description" content="The platform where problems finds their solution">
+      <link rel="stylesheet" href="{% static 'landing_page_style.css' %}">
+      
+  </head>
+  <body>
+    <table>
+      <col style="width: 68%;">
+      <col style="width: 5%;">
+      <col style="width: 5%;">
+      <col style="width: 8%;">
+      <col style="width: 8%;">
+      <tr>
+        <th><h1 style="text-align:left; font-family:garamond;padding-left:20px;">INNOCONNECT</h1></th>
+        <th><a href="#about">About</a></th>
+        <th><a href="login.html">Login</a></th>
+        <th><a href="register.html">New User</a></th>
+        <th><a href="#contactus">Contact Us</a></th>
+      </tr>
+    </table>
+    <hr>
+      <main>
+        <section style="height:300px">
+          <h1 style="text-align:center; padding-top:100px;font-style:italic;font-size:55px;">Welocome to Innoconnect</h1>
+          <p style="text-align:center;font-style:italic;font-size:30px;">Come with a problem, collaborate to solve......</p>
+        </section>
+        <hr  class="line">
+        <section id="about">
+          <table>
+            <col style="width: 30%;">
+            <col style="width: 70%;">
+          <tr>
+            <th><h2 style="font-family:papyrus;">About</h2></th>
+            <th><p style="font-family:papyrus;">In a college setting, students often generate innovative project ideas but may lack the skills or collaborators
+needed to execute them. This project introduces a
+collaborative web application where students can share
+their ideas, detailing required skills, algorithms, and
+relevant coursework. Each student has a personal
+profile to post their project ideas, making them visible
+to peers. Interested students can connect with project
+initiators to contribute expertise and collaboratively
+enhance the project. As projects progress, the platform
+tracks and displays key information on completed
+projects, including implementation details, technologies
+used, and team members involved. This fosters a
+collaborative learning ecosystem, empowering students
+to innovate and build valuable networks for project
+implementation, by bridging the distance between
+ideas and skills, this platform supports the entire project
+journey from ideation to completion.</p></th>
+          </tr>
+          </table>
+        </section>
+        <hr  class="line">
+        <section style="font-style: italic;">
+          <h2 style="text-align:center;font-style:oblique;font-size:30px;">Services</h2>
+          <div class="container">
+            <div class="box">
+              <h2 style="text-align:center;">Problem</h2>
+              <p style="padding: 20px;">Having problem but lack of skill and experience, explore here....</p>
+              <br><br>
+              <button onclick="location.href='login.html'" style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px;margin-left:35%;">Explore</button>
+
+            </div>
+            <div class="box">
+              <h2 style="text-align:center;">Apply</h2>
+              <p style="padding: 20px;">Want to apply your Tecnical knowledge, explore problems that requires your skills....</p><br><br>
+              <button onclick="location.href='login.html'" style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px;margin-left:35%;">Explore</button>
+            </div>
+          </div>
+        </section>
+        <br>
+        <hr  class="line">
+        <section id="contactus">
+          <h2 style="text-align:center;font-style:oblique;font-size:30px;">Contact Us</h2>
+          <table style="width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 0 10px rgba(255, 255, 255);">
+             <tr>
+                 <th style="text-align: left; padding: 20px;">
+                     <form action="/ask/" method="post" style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);">
+                        {% csrf_token %}
+                        <label for="name" style="display: block; font-size: 16px; margin-bottom: 8px; color: #333;">Your Name</label>
+                         <input type="text" id="name" name="name" placeholder="Enter your name" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;"><br>
+            
+                         <label for="email" style="display: block; font-size: 16px; margin-bottom: 8px; color: #333;">Your Email</label>
+                         <input type="email" id="email" name="email" placeholder="Enter your email" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;"><br>
+            
+                         <label for="message" style="display: block; font-size: 16px; margin-bottom: 8px; color: #333;">Your Message</label>
+                         <textarea id="message" name="message" rows="5" placeholder="Write your message" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;"></textarea><br>            
+                     <button type="submit" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #007bff; border: none; border-radius: 4px; cursor: pointer;">Send Message</button>
+                   </form>
+                 </th>
+             </tr>
+          </table>
+            
+        </section>
+      </main>
+      <hr  class="line">
+      <footer>
+        <p style="text-align:center;">Copyright &copy; Innoskill </p>
+      </footer>
+  </body>
+</html>

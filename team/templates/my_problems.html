@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Problems</title>
+    <link rel="stylesheet" href="landingpage.css">
+</head>
+<body>
+    <div class="header">
+        <div id="website-name"><h1>INNO SKILL</h1></div>
+        <a href="{% url 'user' %}" style="text-decoration: none; font-size: 18px;">Back to Dashboard</a>
+    </div>
+
+    <h2 style="text-align: center;">My Problems</h2>
+
+    {% if problems_with_solutions %}
+    {% for item in problems_with_solutions %}
+    <div class="post-container">
+        <div class="post-header">
+            <span class="post-date">{{ item.problem.created_at|date:"F d, Y" }}</span>
+        </div>
+        <div class="post-body">
+            <div class="post-title"><strong>{{ item.problem.title }}</strong></div>
+            <div class="post-description">
+                {{ item.problem.description }}
+            </div>
+            <span class="status-label">{{ item.problem.get_status_display }}</span>
+            <div class="post-actions">
+                <a href="{% url 'edit_problem' item.problem.id %}" class="edit-button">Edit</a>
+                <a href="{% url 'delete_problem' item.problem.id %}" class="delete-button" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+            </div>
+        </div>
+
+        <!-- Solutions Section -->
+        <div class="solutions-container">
+            <h3>Solutions:</h3>
+            <ul>
+                {% for solution in item.solutions %}
+                    <li>
+                        <strong>{{ solution.organizer.username }}</strong> - {{ solution.solution_text }} 
+                        <span class="solution-timestamp">({{ solution.timestamp|date:"F d, Y H:i" }})</span>
+                    </li>
+                {% empty %}
+                    <li>No solutions yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endfor %}
+
+    {% else %}
+        <p style="text-align: center;">No problems posted yet.</p>
+    {% endif %}
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

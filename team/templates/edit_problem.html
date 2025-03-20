@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Problem</title>
+    <link rel="stylesheet" href="{% static 'my_problems_style.css' %}">
+</head>
+<body>
+    <h1>Edit Problem</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="{{ problem.title }}" required><br><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required>{{ problem.description }}</textarea><br><br>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="yet_to_start" {% if problem.status == "yet_to_start" %}selected{% endif %}>Yet to Start</option>
+            <option value="ongoing" {% if problem.status == "ongoing" %}selected{% endif %}>Ongoing</option>
+            <option value="done" {% if problem.status == "done" %}selected{% endif %}>Done</option>
+        </select>
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <br>
+    <a href="{% url 'my_problems' %}">Back to My Problems</a>
+</body>
+</html>
