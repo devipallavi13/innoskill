@@ -5,7 +5,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Problems</title>
-    <link rel="stylesheet" href="landingpage.css">
+    <!-- <link rel="stylesheet" href="landingpage.css"> -->
+     <style>
+        /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.header {
+    background-color: #4a90e2;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.header a:hover {
+    text-decoration: underline;
+}
+
+/* Form Styling */
+form {
+    width: 50%;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    height: 100px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #357abd;
+}
+
+/* Problems List */
+.post-container {
+    width: 60%;
+    margin: 20px auto;
+    padding: 15px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.post-header {
+    font-size: 14px;
+    color: #888;
+    text-align: right;
+}
+
+.post-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.post-description {
+    font-size: 16px;
+    color: #555;
+}
+
+.post-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-button, .delete-button {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+}
+
+.edit-button {
+    background-color: #f39c12;
+}
+
+.delete-button {
+    background-color: #e74c3c;
+}
+
+.edit-button:hover {
+    background-color: #d68910;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    form, .post-container {
+        width: 90%;
+    }
+}
+
+
+     </style>
 </head>
 <body>
     <div class="header">
